@@ -1,16 +1,11 @@
-/* table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 0 auto;
-  font-size: 1.2rem;
-  font-family: "Roboto", sans-serif;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  border-radius: 5px 5px 0 0;
-} */
+table {
+  border: 1px solid #ddd;
+}
 
 th {
   text-align: left;
   font-weight: bold;
+  background-color: #ddd;
 }
 
 /* for the <td> alternate color for every other row */
