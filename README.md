@@ -76,3 +76,5 @@ Let's run through an example:
 As you may have noticed, while I was `console.log` the `formData`, it would only show what was typed previously. However, the data is still stored in the `formdata` properly. The reason this happens is because React calls are asynchronous. This is the same reason why I also needed to switch tables each time for the new data to show up. 
 
 To fix this issue, we can use the `useEffect` hook but we can add that later on once we finish writing all the stored procedures.
+
+Another issue is that Add Airport's `locationID` needs to be a dropdown instead of an input. We can do this once we finish writing the stored procedures.
