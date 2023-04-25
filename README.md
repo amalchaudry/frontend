@@ -36,6 +36,8 @@ Let's take a look at `grantPilotLicense`:
 
 As you can see, it basically takes the values from `personID` and `licenseID` and then makes a call to `grant_pilot_license` stored procedure in mySQL. The `?` stuff if just syntax that's used to pass into the parameters. 
 So we essentially just write each new method so that it matches the parameters in each stored procedure in mySQL.
+
+**IMPORTANT**: Anytime you make a change in the backend, you must re-run the server. So stop the current server in terminal and then run `node index.js` again.
   
 As you are writing each new one, I recommend debugging it in a software called Postman. With Postman, you can make GET and POST requests without needing to run the frontend so you can make sure the data is being processed properly.
   
