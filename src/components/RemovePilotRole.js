@@ -1,10 +1,9 @@
 import { useState } from "react";
 import api from "./api";
 
-const GrantPilotLicense = () => {
+const RemovePilotRole = () => {
   const [formData, setFormData] = useState({
     personID: "",
-    licenseID: "",
   });
 
   const handleChange = (e) => {
@@ -13,14 +12,12 @@ const GrantPilotLicense = () => {
       ...prevData,
       [name]: value,
     }));
-    console.log(formData);
   };
 
-  // when the submit button is pressed, it makes a post request to the backend
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/grantPilotLicense", formData);
+      await api.post("/removePilotRole", formData);
     } catch (err) {
       console.log(err);
     }
@@ -29,7 +26,7 @@ const GrantPilotLicense = () => {
   return (
     <div>
       <fieldset>
-        <legend>Grant Pilot License</legend>
+        <legend>Remove Pilot Role</legend>
         <form onSubmit={handleSubmit}>
           <label htmlFor="personID">personID</label>
           <input
@@ -39,19 +36,11 @@ const GrantPilotLicense = () => {
             value={formData.personID}
             onChange={handleChange}
           />
-          <label htmlFor="licenseID">licenseID</label>
-          <input
-            type="text"
-            id="licenseID"
-            name="licenseID"
-            value={formData.licenseID}
-            onChange={handleChange}
-          />
-          <button type="submit">Submit</button>
+          <button type="submit">Remove Pilot Role</button>
         </form>
       </fieldset>
     </div>
   );
 };
 
-export default GrantPilotLicense;
+export default RemovePilotRole;

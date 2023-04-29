@@ -2,9 +2,25 @@ import { useState } from "react";
 import SelectTable from "./components/SelectTable";
 import AddAirport from "components/AddAirport";
 import GrantPilotLicense from "components/GrantPilotLicense";
+import AddAirplane from "components/AddAirplane";
+import AddPerson from "components/AddPerson";
+import OfferFlight from "components/OfferFlight";
+import PurchaseTicketAndSeat from "components/PurchaseTicketAndSeat";
+import AddUpdateLeg from "components/AddUpdateLeg";
+import StartRoute from "components/StartRoute";
+import ExtendRoute from "components/ExtendRoute";
+import FlightLanding from "components/FlightLanding";
+import FlightTakeoff from "components/FlightTakeoff";
+import PassengersBoard from "components/PassengersBoard";
+import PassengersDisembark from "components/PassengersDisembark";
+import AssignPilot from "components/AssignPilot";
+import RecycleCrew from "components/RecycleCrew";
+import RetireFlight from "components/RetireFlight";
+import RemovePassengerRole from "components/RemovePassengerRole";
+import RemovePilotRole from "components/RemovePilotRole";
 
 const App = () => {
-  const [table, setTable] = useState("airplane");
+  const [table, setTable] = useState("");
   const handleTableChange = (event) => setTable(event.target.value);
 
   const [view, setView] = useState("");
@@ -44,6 +60,23 @@ const App = () => {
       <br />
       <AddAirport />
       <GrantPilotLicense />
+      <AddAirplane />
+      <AddPerson />
+      <OfferFlight />
+      <PurchaseTicketAndSeat />
+      <AddUpdateLeg />
+      <StartRoute />
+      <ExtendRoute />
+      <FlightLanding />
+      <FlightTakeoff />
+      <PassengersBoard />
+      <PassengersDisembark />
+      <AssignPilot />
+      <RecycleCrew  />
+      <RetireFlight />
+      <RemovePassengerRole />
+      <RemovePilotRole />
+
     </div>
   );
 };
