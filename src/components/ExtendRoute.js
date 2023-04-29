@@ -1,10 +1,10 @@
 import { useState } from "react";
 import api from "./api";
 
-const GrantPilotLicense = () => {
+const ExtendRoute = () => {
   const [formData, setFormData] = useState({
-    personID: "",
-    licenseID: "",
+    routeID: "",
+    legID: "",
   });
 
   const handleChange = (e) => {
@@ -13,14 +13,12 @@ const GrantPilotLicense = () => {
       ...prevData,
       [name]: value,
     }));
-    console.log(formData);
   };
 
-  // when the submit button is pressed, it makes a post request to the backend
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/grantPilotLicense", formData);
+      await api.post("/extendRoute", formData);
     } catch (err) {
       console.log(err);
     }
@@ -29,29 +27,29 @@ const GrantPilotLicense = () => {
   return (
     <div>
       <fieldset>
-        <legend>Grant Pilot License</legend>
+        <legend>Extend Route</legend>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="personID">personID</label>
+          <label htmlFor="routeID">routeID</label>
           <input
             type="text"
-            id="personID"
-            name="personID"
-            value={formData.personID}
+            id="routeID"
+            name="routeID"
+            value={formData.routeID}
             onChange={handleChange}
           />
-          <label htmlFor="licenseID">licenseID</label>
+          <label htmlFor="legID">legID</label>
           <input
             type="text"
-            id="licenseID"
-            name="licenseID"
-            value={formData.licenseID}
+            id="legID"
+            name="legID"
+            value={formData.legID}
             onChange={handleChange}
           />
-          <button type="submit">Submit</button>
+          <button type="submit">Extend Route</button>
         </form>
       </fieldset>
     </div>
   );
 };
 
-export default GrantPilotLicense;
+export default ExtendRoute;
