@@ -20,11 +20,8 @@ import RemovePassengerRole from "components/RemovePassengerRole";
 import RemovePilotRole from "components/RemovePilotRole";
 
 const App = () => {
-  const [table, setTable] = useState("");
+  const [table, setTable] = useState("airplane");
   const handleTableChange = (event) => setTable(event.target.value);
-
-  const [view, setView] = useState("");
-  const handleViewChange = (event) => setView(event.target.value);
 
   return (
     <div className="App">
@@ -58,10 +55,10 @@ const App = () => {
       <h3>{table}</h3>
       <SelectTable currentTable={table} key={table} />
       <br />
-      <AddAirport />
-      <GrantPilotLicense />
+      {/* <AddAirport />
+      <GrantPilotLicense /> */}
       <AddAirplane />
-      <AddPerson />
+      {/* <AddPerson />
       <OfferFlight />
       <PurchaseTicketAndSeat />
       <AddUpdateLeg />
@@ -72,11 +69,10 @@ const App = () => {
       <PassengersBoard />
       <PassengersDisembark />
       <AssignPilot />
-      <RecycleCrew  />
+      <RecycleCrew />
       <RetireFlight />
       <RemovePassengerRole />
-      <RemovePilotRole />
-
+      <RemovePilotRole /> */}
     </div>
   );
 };
