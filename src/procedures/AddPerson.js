@@ -6,8 +6,8 @@ const AddPerson = () => {
     personID: "p78",
     first_name: "Sam",
     last_name: "Jones",
-    taxID: "port_2",
-    locationID: "NULL",
+    locationID: "port_2",
+    taxID: "NULL",
     experience: "4",
     flying_airline: "American",
     flying_tail: "n330ss",
@@ -60,20 +60,20 @@ const AddPerson = () => {
             value={formData.last_name}
             onChange={handleChange}
           />
+          <label htmlFor="locationID">locationID</label>
+          <input
+            type="text"
+            id="locationID"
+            name="locationID"
+            value={formData.locationID}
+            onChange={handleChange}
+          />
           <label htmlFor="taxID">taxID</label>
           <input
             type="text"
             id="taxID"
             name="taxID"
             value={formData.taxID}
-            onChange={handleChange}
-          />
-          <label htmlFor="locationID">locationID (dropdown)</label>
-          <input
-            type="text"
-            id="locationID"
-            name="locationID"
-            value={formData.locationID}
             onChange={handleChange}
           />
           <label htmlFor="experience">experience</label>

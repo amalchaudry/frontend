@@ -121,7 +121,7 @@ const App = () => {
       <Collapsible trigger="18. Remove Pilot Role">
         <RemovePilotRole />
       </Collapsible>
-      <Collapsible trigger="25. Simulation Cycle (add this one)">
+      <Collapsible trigger="25. Simulation Cycle">
         <SimulationCycle />
       </Collapsible>
 
