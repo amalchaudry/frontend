@@ -1,5 +1,5 @@
-import { useState } from "react";
-import api from "./api";
+import { useEffect, useState } from "react";
+import api from "../components/api";
 
 const AddAirport = () => {
   const [formData, setFormData] = useState({
@@ -7,30 +7,30 @@ const AddAirport = () => {
     airport_name: "San Jose Mineta International Airport",
     city: "San Jose",
     state: "CA",
-    locationID: null,
+    locationID: "null",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => {
+      const newData = { ...prevData, [name]: value };
+      return newData;
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/addAirport", formData);
+      const response = await api.post("/addAirport", formData);
+      alert(JSON.stringify(response.data));
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   };
 
   return (
     <div>
       <fieldset>
-        <legend>Add Airport</legend>
         <form onSubmit={handleSubmit}>
           <label htmlFor="airportID">airportID</label>
           <input
@@ -64,7 +64,7 @@ const AddAirport = () => {
             value={formData.state}
             onChange={handleChange}
           />
-          <label htmlFor="locationID">locationID (dropdown)</label>
+          <label htmlFor="locationID">locationID</label>
           <input
             type="text"
             id="locationID"

@@ -1,49 +1,52 @@
-import { useState } from "react";
-import api from "./api";
+import { useEffect, useState } from "react";
+import api from "../components/api";
+import "../components/components.css";
 
 const AddAirplane = () => {
   const [formData, setFormData] = useState({
-    airlineID: "",
-    tail_num: "",
-    seat_capacity: "",
-    speed: "",
-    locationID: "",
-    plane_type: "",
-    skids: "",
-    propellers: "",
-    jet_engines: "",
+    airlineID: "Delta",
+    tail_num: "n120jn",
+    seat_capacity: "10",
+    speed: "350",
+    locationID: "NULL",
+    plane_type: "jet",
+    skids: "NULL",
+    propellers: "NULL",
+    jet_engines: "4",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => {
+      const newData = { ...prevData, [name]: value };
+      return newData;
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/addAirplane", formData);
+      const response = await api.post("/addAirplane", formData);
+      alert(JSON.stringify(response.data));
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   };
 
   return (
     <div>
       <fieldset>
-        <legend>Add Airplane</legend>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="airlineID">airlineID</label>
-          <input
-            type="text"
-            id="airlineID"
-            name="airlineID"
-            value={formData.airlineID}
-            onChange={handleChange}
-          />
+          <div>
+            <label htmlFor="airlineID">airlineID</label>
+            <input
+              type="text"
+              id="airlineID"
+              name="airlineID"
+              value={formData.airlineID}
+              onChange={handleChange}
+            />
+          </div>
           <label htmlFor="tail_num">tail_num</label>
           <input
             type="text"
@@ -68,7 +71,7 @@ const AddAirplane = () => {
             value={formData.speed}
             onChange={handleChange}
           />
-          <label htmlFor="locationID">locationID (dropdown)</label>
+          <label htmlFor="locationID">locationID</label>
           <input
             type="text"
             id="locationID"
@@ -84,7 +87,7 @@ const AddAirplane = () => {
             value={formData.plane_type}
             onChange={handleChange}
           />
-        <label htmlFor="skids">skids</label>
+          <label htmlFor="skids">skids</label>
           <input
             type="text"
             id="skids"
@@ -92,7 +95,7 @@ const AddAirplane = () => {
             value={formData.skids}
             onChange={handleChange}
           />
-        <label htmlFor="propellers">propellers</label>
+          <label htmlFor="propellers">propellers</label>
           <input
             type="text"
             id="propellers"
@@ -100,7 +103,7 @@ const AddAirplane = () => {
             value={formData.propellers}
             onChange={handleChange}
           />
-        <label htmlFor="jet_engines">jet_engines</label>
+          <label htmlFor="jet_engines">jet_engines</label>
           <input
             type="text"
             id="jet_engines"
@@ -108,8 +111,7 @@ const AddAirplane = () => {
             value={formData.jet_engines}
             onChange={handleChange}
           />
-
-          <button type="submit">Add Airport</button>
+          <button type="submit">Submit</button>
         </form>
       </fieldset>
     </div>

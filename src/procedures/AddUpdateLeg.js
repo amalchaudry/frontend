@@ -1,35 +1,35 @@
-import { useState } from "react";
-import api from "./api";
+import { useEffect, useState } from "react";
+import api from "../components/api";
 
 const AddUpdateLeg = () => {
   const [formData, setFormData] = useState({
-    legID: "",
-    distance: "",
-    departure: "",
-    arrival: "",
+    legID: "leg_28",
+    distance: "2800",
+    departure: "DCA",
+    arrival: "SEA",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => {
+      const newData = { ...prevData, [name]: value };
+      return newData;
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/addupdateLeg", formData);
+      const response = await api.post("/addupdateLeg", formData);
+      alert(JSON.stringify(response.data));
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   };
 
   return (
     <div>
       <fieldset>
-        <legend>Add or Update Leg</legend>
         <form onSubmit={handleSubmit}>
           <label htmlFor="legID">legID</label>
           <input

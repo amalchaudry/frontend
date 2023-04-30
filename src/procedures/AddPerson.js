@@ -1,40 +1,40 @@
-import { useState } from "react";
-import api from "./api";
+import { useEffect, useState } from "react";
+import api from "../components/api";
 
 const AddPerson = () => {
   const [formData, setFormData] = useState({
-    personID: "",
-    first_name: "",
-    last_name: "",
-    taxID: "",
-    locationID: "",
-    experience: "",
-    flying_airline: "",
-    flying_tail: "",
-    miles: "",
+    personID: "p78",
+    first_name: "Sam",
+    last_name: "Jones",
+    taxID: "port_2",
+    locationID: "NULL",
+    experience: "4",
+    flying_airline: "American",
+    flying_tail: "n330ss",
+    miles: "20",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => {
+      const newData = { ...prevData, [name]: value };
+      return newData;
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/addPerson", formData);
+      const response = await api.post("/addPerson", formData);
+      alert(JSON.stringify(response.data));
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   };
 
   return (
     <div>
       <fieldset>
-        <legend>Add Person</legend>
         <form onSubmit={handleSubmit}>
           <label htmlFor="personID">personID</label>
           <input
@@ -84,7 +84,7 @@ const AddPerson = () => {
             value={formData.experience}
             onChange={handleChange}
           />
-        <label htmlFor="flying_airline">flying_airline</label>
+          <label htmlFor="flying_airline">flying_airline</label>
           <input
             type="text"
             id="flying_airline"
@@ -92,7 +92,7 @@ const AddPerson = () => {
             value={formData.flying_airline}
             onChange={handleChange}
           />
-        <label htmlFor="flying_tail">flying_tail</label>
+          <label htmlFor="flying_tail">flying_tail</label>
           <input
             type="text"
             id="flying_tail"
@@ -100,7 +100,7 @@ const AddPerson = () => {
             value={formData.flying_tail}
             onChange={handleChange}
           />
-        <label htmlFor="miles">miles</label>
+          <label htmlFor="miles">miles</label>
           <input
             type="text"
             id="miles"

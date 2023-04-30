@@ -1,32 +1,32 @@
-import { useState } from "react";
-import api from "./api";
+import { useEffect, useState } from "react";
+import api from "../components/api";
 
-const RemovePilotRole = () => {
+const RemovePassengerRole = () => {
   const [formData, setFormData] = useState({
-    personID: "",
+    personID: "p45",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => {
+      const newData = { ...prevData, [name]: value };
+      return newData;
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/removePilotRole", formData);
+      const response = await api.post("/removePassengerRole", formData);
+      alert(JSON.stringify(response.data));
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   };
 
   return (
     <div>
       <fieldset>
-        <legend>Remove Pilot Role</legend>
         <form onSubmit={handleSubmit}>
           <label htmlFor="personID">personID</label>
           <input
@@ -36,11 +36,11 @@ const RemovePilotRole = () => {
             value={formData.personID}
             onChange={handleChange}
           />
-          <button type="submit">Remove Pilot Role</button>
+          <button type="submit">Remove Passenger Role</button>
         </form>
       </fieldset>
     </div>
   );
 };
 
-export default RemovePilotRole;
+export default RemovePassengerRole;

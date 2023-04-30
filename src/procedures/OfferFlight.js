@@ -1,38 +1,38 @@
-import { useState } from "react";
-import api from "./api";
+import { useEffect, useState } from "react";
+import api from "../components/api";
 
 const OfferFlight = () => {
   const [formData, setFormData] = useState({
-    flightID: "",
-    routeID: "",
-    support_airline: "",
-    support_tail: "",
-    progress: "",
-    airplane_status: "",
-    next_time: "",
+    flightID: "UN_3403",
+    routeID: "westbound_north_milk_run",
+    support_airline: "American",
+    support_tail: "n380sd",
+    progress: "0",
+    airplane_status: "on_ground",
+    next_time: "15:30:00",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => {
+      const newData = { ...prevData, [name]: value };
+      return newData;
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/offerFlight", formData);
+      const response = await api.post("/offerFlight", formData);
+      alert(JSON.stringify(response.data));
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   };
 
   return (
     <div>
       <fieldset>
-        <legend>Offer Flight</legend>
         <form onSubmit={handleSubmit}>
           <label htmlFor="flightID">flightID</label>
           <input
@@ -82,7 +82,7 @@ const OfferFlight = () => {
             value={formData.airplane_status}
             onChange={handleChange}
           />
-        <label htmlFor="next_time">next_time</label>
+          <label htmlFor="next_time">next_time</label>
           <input
             type="text"
             id="next_time"

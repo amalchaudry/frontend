@@ -1,32 +1,32 @@
-import { useState } from "react";
-import api from "./api";
+import { useEffect, useState } from "react";
+import api from "../components/api";
 
-const PassengersBoard = () => {
+const FlightTakeoff = () => {
   const [formData, setFormData] = useState({
-    flightID: "",
+    flightID: "DL_1174",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => {
+      const newData = { ...prevData, [name]: value };
+      return newData;
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/passengersBoard", formData);
+      const response = await api.post("/flightTakeoff", formData);
+      alert(JSON.stringify(response.data));
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   };
 
   return (
     <div>
       <fieldset>
-        <legend>Passengers Board</legend>
         <form onSubmit={handleSubmit}>
           <label htmlFor="flightID">flightID</label>
           <input
@@ -36,11 +36,11 @@ const PassengersBoard = () => {
             value={formData.flightID}
             onChange={handleChange}
           />
-          <button type="submit">Passengers Board</button>
+          <button type="submit">Flight Takeoff</button>
         </form>
       </fieldset>
     </div>
   );
 };
 
-export default PassengersBoard;
+export default FlightTakeoff;

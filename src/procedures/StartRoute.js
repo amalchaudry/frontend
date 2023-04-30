@@ -1,33 +1,33 @@
-import { useState } from "react";
-import api from "./api";
+import { useEffect, useState } from "react";
+import api from "../components/api";
 
 const StartRoute = () => {
   const [formData, setFormData] = useState({
-    routeID: "",
-    legID: "",
+    routeID: "new_eastbound_west_milk_run",
+    legID: "leg_10",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => {
+      const newData = { ...prevData, [name]: value };
+      return newData;
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/startRoute", formData);
+      const response = await api.post("/startRoute", formData);
+      alert(JSON.stringify(response.data));
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   };
 
   return (
     <div>
       <fieldset>
-        <legend>Start Route</legend>
         <form onSubmit={handleSubmit}>
           <label htmlFor="routeID">routeID</label>
           <input

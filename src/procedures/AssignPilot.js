@@ -1,33 +1,33 @@
-import { useState } from "react";
-import api from "./api";
+import { useEffect, useState } from "react";
+import api from "../components/api";
 
 const AssignPilot = () => {
   const [formData, setFormData] = useState({
-    flightID: "",
-    personID: "",
+    flightID: "AM_1523",
+    personID: "p19",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => {
+      const newData = { ...prevData, [name]: value };
+      return newData;
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/assignPilot", formData);
+      const response = await api.post("/assignPilot", formData);
+      alert(JSON.stringify(response.data));
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   };
 
   return (
     <div>
       <fieldset>
-        <legend>Assign Pilot</legend>
         <form onSubmit={handleSubmit}>
           <label htmlFor="flightID">flightID</label>
           <input
@@ -37,7 +37,7 @@ const AssignPilot = () => {
             value={formData.flightID}
             onChange={handleChange}
           />
-        <label htmlFor="personID">personID</label>
+          <label htmlFor="personID">personID</label>
           <input
             type="text"
             id="personID"

@@ -1,35 +1,34 @@
-import { useState } from "react";
-import api from "./api";
+import { useEffect, useState } from "react";
+import api from "../components/api";
 
 const GrantPilotLicense = () => {
   const [formData, setFormData] = useState({
-    personID: "",
-    licenseID: "",
+    personID: "p1",
+    license: "prop",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    console.log(formData);
+    setFormData((prevData) => {
+      const newData = { ...prevData, [name]: value };
+      return newData;
+    });
   };
 
   // when the submit button is pressed, it makes a post request to the backend
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/grantPilotLicense", formData);
+      const response = await api.post("/grantPilotLicense", formData);
+      alert(JSON.stringify(response.data));
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   };
 
   return (
     <div>
       <fieldset>
-        <legend>Grant Pilot License</legend>
         <form onSubmit={handleSubmit}>
           <label htmlFor="personID">personID</label>
           <input
@@ -39,15 +38,15 @@ const GrantPilotLicense = () => {
             value={formData.personID}
             onChange={handleChange}
           />
-          <label htmlFor="licenseID">licenseID</label>
+          <label htmlFor="license">license</label>
           <input
             type="text"
-            id="licenseID"
-            name="licenseID"
-            value={formData.licenseID}
+            id="license"
+            name="license"
+            value={formData.license}
             onChange={handleChange}
           />
-          <button type="submit">Submit</button>
+          <button type="submit">Grant Pilot License</button>
         </form>
       </fieldset>
     </div>

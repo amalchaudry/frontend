@@ -1,37 +1,37 @@
-import { useState } from "react";
-import api from "./api";
+import { useEffect, useState } from "react";
+import api from "../components/api";
 
 const PurchaseTicketAndSeat = () => {
   const [formData, setFormData] = useState({
-    ticketID: "",
-    cost: "",
-    carrier: "",
-    customer: "",
-    deplane_at: "",
-    seat_number: "",
+    ticketID: "tkt_dl_20",
+    cost: "450",
+    carrier: "DL_1174",
+    customer: "p23",
+    deplane_at: "JFK",
+    seat_number: "5A",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => {
+      const newData = { ...prevData, [name]: value };
+      return newData;
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/purchaseTicket", formData);
+      const response = await api.post("/purchaseTicket", formData);
+      alert(JSON.stringify(response.data));
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   };
 
   return (
     <div>
       <fieldset>
-        <legend>Purchase Ticket and Seat</legend>
         <form onSubmit={handleSubmit}>
           <label htmlFor="ticketID">ticketID</label>
           <input
