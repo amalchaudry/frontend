@@ -1,3 +1,7 @@
+# High-level overview of our App
+![react-node-express-mysql-crud-example-architecture](https://github.gatech.edu/storage/user/46053/files/adadf5c7-1116-4a2e-ae57-6ffb16fffe85)
+
+
 # Steps to Install
 
 First clone all three repos: frontend, backend, database
